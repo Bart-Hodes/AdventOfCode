@@ -70,7 +70,9 @@ def has_folder_changed(folder, cached_timestamps):
 def generate_readme(all_data):
     """Generate a new README file with stars and runtimes for all years."""
     total_stars = sum(
-        sum(stars.values()) for year_data in all_data.values() for stars in year_data["stars"].values()
+        sum(stars.values())
+        for year_data in all_data.values()
+        for stars in year_data["stars"].values()
     )
 
     readme_content = f"# Advent of Code - Total Stars: {total_stars}\n\n"
@@ -96,7 +98,9 @@ def generate_readme(all_data):
             stars2 = "⭐" * year_data["stars"]["part2"].get(day, 0)
             runtime2 = format_runtime(year_data["runtimes"]["part2"].get(day))
 
-            readme_content += f"| {day} | {stars1} | {runtime1} | {stars2} | {runtime2} |\n"
+            readme_content += (
+                f"| {day} | {stars1} | {runtime1} | {stars2} | {runtime2} |\n"
+            )
 
         readme_content += "\n</details>\n\n"
 
@@ -110,6 +114,7 @@ def main():
     all_data = {}
 
     for year in range(2015, 2025):
+        # Initialize yearly data
         stars_part1 = {}
         stars_part2 = {}
         runtimes_part1 = {}
@@ -121,29 +126,34 @@ def main():
 
             # Check if the folder's contents have changed
             folder_changed, current_timestamps = has_folder_changed(
-                file_path, cache.get(str(year), {}).get(folder, {}).get("timestamps", {})
+                file_path,
+                cache.get(str(year), {}).get(folder, {}).get("timestamps", {}),
             )
 
             if folder_changed:
                 # Run part1.py and record runtime
                 runtime1 = run_solution(file_path, "part1")
-                if runtime1 is not None:
-                    stars_part1[day] = 1
-                    runtimes_part1[day] = runtime1
+                stars_part1[day] = 1 if runtime1 is not None else 0
+                runtimes_part1[day] = runtime1
 
                 # Run part2.py and record runtime
                 runtime2 = run_solution(file_path, "part2")
-                if runtime2 is not None:
-                    stars_part2[day] = 1
-                    runtimes_part2[day] = runtime2
+                stars_part2[day] = 1 if runtime2 is not None else 0
+                runtimes_part2[day] = runtime2
 
                 # Update cache
-                if year not in cache:
+                if str(year) not in cache:
                     cache[str(year)] = {}
                 cache[str(year)][folder] = {
                     "timestamps": current_timestamps,
-                    "stars": {"part1": stars_part1.get(day, 0), "part2": stars_part2.get(day, 0)},
-                    "runtimes": {"part1": runtimes_part1.get(day), "part2": runtimes_part2.get(day)},
+                    "stars": {
+                        "part1": stars_part1.get(day, 0),
+                        "part2": stars_part2.get(day, 0),
+                    },
+                    "runtimes": {
+                        "part1": runtimes_part1.get(day),
+                        "part2": runtimes_part2.get(day),
+                    },
                 }
             else:
                 # Load from cache
@@ -164,6 +174,49 @@ def main():
 
     # Generate a new README with total stars and per-year details
     generate_readme(all_data)
+
+
+def generate_readme(all_data):
+    """Generate a new README file with stars and runtimes for all years."""
+    total_stars = sum(
+        sum(stars.values())
+        for year_data in all_data.values()
+        for stars in year_data["stars"].values()
+    )
+
+    readme_content = f"# Advent of Code - Total Stars: {total_stars}\n\n"
+
+    for year, year_data in sorted(all_data.items()):
+        total_year_stars = sum(year_data["stars"]["part1"].values()) + sum(
+            year_data["stars"]["part2"].values()
+        )
+
+        if total_year_stars == 0:
+            continue  # Skip years with no solved days
+
+        readme_content += f"<details>\n<summary>{year} - Total Stars: {total_year_stars}</summary>\n\n"
+        readme_content += (
+            "| Day | Part 1 Stars | Part 1 Runtime | Part 2 Stars | Part 2 Runtime |\n"
+        )
+        readme_content += (
+            "|-----|--------------|----------------|--------------|----------------|\n"
+        )
+
+        for day in sorted(year_data["runtimes"]["part1"].keys()):
+            stars1 = "⭐" * year_data["stars"]["part1"].get(day, 0)
+            runtime1 = format_runtime(year_data["runtimes"]["part1"].get(day))
+            stars2 = "⭐" * year_data["stars"]["part2"].get(day, 0)
+            runtime2 = format_runtime(year_data["runtimes"]["part2"].get(day))
+
+            readme_content += (
+                f"| {day} | {stars1} | {runtime1} | {stars2} | {runtime2} |\n"
+            )
+
+        readme_content += "\n</details>\n\n"
+
+    with open(README_PATH, "w") as f:
+        f.write(readme_content)
+    print(f"README file created at: {README_PATH}")
 
 
 if __name__ == "__main__":

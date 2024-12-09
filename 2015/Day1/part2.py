@@ -1,4 +1,4 @@
-with open("input.txt", "r") as f:
+with open("2015/Day1/input.txt", "r") as f:
     sequence = f.readline()
 
 count = 0

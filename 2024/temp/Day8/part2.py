@@ -1,4 +1,4 @@
-with open("input.txt", "r") as f:
+with open("2024/Day8/input.txt", "r") as f:
     lines = [line.strip() for line in f.readlines()]
 
 antennaDict = {}

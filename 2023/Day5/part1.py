@@ -7,7 +7,7 @@ def x_to_x_Map(seedId, rule):
     return seedId, False
 
 
-with open("input.txt", "r") as puzzleInput:
+with open("2023/Day5/input.txt", "r") as puzzleInput:
     lines = puzzleInput.read().split("\n")
 
 lines[-1] += "\n"

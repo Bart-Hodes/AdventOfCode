@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import re
 
-with open("input.txt", "r") as puzzleInput:
+with open("2023/Day25/input.txt", "r") as puzzleInput:
     lines = puzzleInput.read().split("\n")
 
 

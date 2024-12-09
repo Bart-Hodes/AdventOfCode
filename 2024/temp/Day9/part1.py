@@ -1,4 +1,4 @@
-with open("input.txt") as file:
+with open("2024/Day9/input.txt") as file:
     fileSystem = file.read().strip()
 
 decompressedMemory = []

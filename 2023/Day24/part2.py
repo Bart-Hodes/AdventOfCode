@@ -1,7 +1,7 @@
 import re
 
 
-with open("test.txt", "r") as puzzleInput:
+with open("2023/Day24/input.txt", "r") as puzzleInput:
     lines = puzzleInput.read().split("\n")
 
 vectors = []

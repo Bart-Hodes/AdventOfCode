@@ -7,7 +7,7 @@ def is_valid_update(update, rules):
     return True
 
 
-with open("input.txt", "r") as f:
+with open("2024/Day5/input.txt", "r") as f:
     lines = [line.strip() for line in f.readlines()]
 
 # Parse input

@@ -1,5 +1,5 @@
 # Read the disk map from the input file
-with open("test.txt") as file:
+with open("2024/Day9/input.txt") as file:
     fileSystem = file.read().strip()
 
 # Decompress the dense format to represent the disk
@@ -17,7 +17,8 @@ while i < len(fileSystem):
 
 
 # Start compacting files by moving them whole in reverse order of their IDs
-file_ids = sorted(set(c for c in decompressedMemory if c != "."), reverse=True)
+file_ids = [str(file_id) for file_id in range(int(len(fileSystem))//2+1)]
+file_ids.reverse()
 
 for currentFileID in file_ids:
     # Find the current blocks occupied by the file start with the last one

@@ -11,7 +11,7 @@ def debugPrint(input, pos, visited):
     print("\n")
 
 
-with open("input.txt", "r") as f:
+with open("2024/Day6/input.txt", "r") as f:
     input = []
     for line in f:
         input.append(line.strip("\n"))

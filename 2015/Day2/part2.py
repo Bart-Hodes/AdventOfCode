@@ -1,4 +1,4 @@
-with open("input.txt") as f:
+with open("2015/Day2/input.txt") as f:
     data = [line.strip("\n") for line in f.readlines()]
 
 

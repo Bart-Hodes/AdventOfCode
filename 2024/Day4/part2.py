@@ -16,7 +16,7 @@ def checkIfValidX_MAS(input, x, y):
     return True
 
 
-with open("input.txt", "r") as f:
+with open("2024/Day4/input.txt", "r") as f:
     input = []
     for line in f:
         input.append(line.strip("\n"))

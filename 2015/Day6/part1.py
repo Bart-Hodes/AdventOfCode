@@ -1,4 +1,4 @@
-with open("input.txt") as f:
+with open("2015/Day6/input.txt") as f:
     data = [line.strip("\n") for line in f.readlines()]
 
 grid = [[0 for i in range(1000)] for j in range(1000)]

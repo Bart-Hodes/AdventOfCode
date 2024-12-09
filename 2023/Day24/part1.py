@@ -16,7 +16,7 @@ def line_intersection(line1, line2):
     y = det(d, ydiff) / div
     return x, y
 
-with open("input.txt", "r") as puzzleInput:
+with open("2023/Day24/input.txt", "r") as puzzleInput:
     lines = puzzleInput.read().split("\n")
     
 testArea = [(200000000000000,200000000000000),(400000000000000,400000000000000)]

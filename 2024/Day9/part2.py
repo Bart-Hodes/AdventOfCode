@@ -1,67 +1,52 @@
 # Read the disk map from the input file
-with open("2024/Day9/input.txt") as file:
-    fileSystem = file.read().strip()
+with open("input.txt") as file:
+    fileSystem = list(file.read().strip())
 
-# Decompress the dense format to represent the disk
-decompressedMemory = []
-i = 0
-while i < len(fileSystem):
-    if i % 2 == 0:  # File length
-        file_id = str(i // 2)  # File ID
-        file_length = int(fileSystem[i])
-        decompressedMemory.extend([file_id] * file_length)
-    else:  # Free space length
-        free_space_length = int(fileSystem[i])
-        decompressedMemory.extend(["."] * free_space_length)
-    i += 1
+fileIDs = [x for x in range(0, (len(fileSystem)+1) //2)]
 
 
-# Start compacting files by moving them whole in reverse order of their IDs
-file_ids = [str(file_id) for file_id in range(int(len(fileSystem))//2+1)]
-file_ids.reverse()
+fileIDs.reverse()
+mutations = []
+# print(fileSystem)
+for fileID in fileIDs:
+    fileSize = int(fileSystem[fileID*2])
 
-for currentFileID in file_ids:
-    # Find the current blocks occupied by the file start with the last one
-    file_blocks = [i for i, c in enumerate(decompressedMemory) if c == currentFileID]
+    for spaceIdx in range(1, fileID*2,2):
+        if int(fileSystem[spaceIdx]) >= fileSize:
+            mutations.append((spaceIdx,fileID,fileSize))
+            fileSystem[spaceIdx] = int(fileSystem[spaceIdx]) -  int(fileSize)
+            fileSystem[fileID*2-1] =int(fileSystem[fileID*2-1])+ int(fileSystem[fileID*2])
+            fileSystem[fileID*2] = 0
 
-    # Determine the file size
-    file_size = len(file_blocks)
+            break
+    # print(fileSystem)
 
-    # Find the leftmost free span large enough for the file
-    free_space_start = None
-    current_free_span = 0
-    for i, block in enumerate(decompressedMemory[: file_blocks[0] + 1]):
-        if block == ".":
-            if current_free_span == 0:
-                free_space_start = i
-            current_free_span += 1
-            if current_free_span == file_size:
-                break
-        else:
-            current_free_span = 0
-
-    # If no suitable free space found, skip moving this file
-    if current_free_span < file_size:
-        continue
-
-    # Clear the current file blocks
-    for idx in file_blocks:
-        decompressedMemory[idx] = "."
-
-    # Move the file to the free space
-    for i in range(file_size):
-        decompressedMemory[free_space_start + i] = currentFileID
-
-    # strip the trailing dots
-    while decompressedMemory[-1] == ".":
-        decompressedMemory = decompressedMemory[:-1]
+# print(fileSystem)
+mutations.sort(key=lambda x: x[0])
 
 
-# Calculate the checksum
+
+memory = ""
 checksum = 0
-for idx, fileID in enumerate(decompressedMemory):
-    if fileID != ".":
-        checksum += idx * int(fileID)
+index = 0
+for i in range(len(fileSystem)):
+    if i % 2 == 0:
+        memory += (str(i//2)* int(fileSystem[i]))
+        for checksumIdx in range(index, index+int(fileSystem[i]),1):
+            checksum += checksumIdx * i//2
+        index += int(fileSystem[i])
 
-# Print the resulting checksum
+        j = 0
+        while mutations and mutations[j][0] - 1 == i:
+            memory += (str(mutations[j][1])* mutations[j][2])
+            for checksumIdx in range(index, index+int(mutations[j][2]),1):
+                checksum += checksumIdx * mutations[j][1]
+            index += int(mutations[j][2])
+            mutations.pop(j)
+
+    else:
+        memory += ("." * int(fileSystem[i]))
+        index += int(fileSystem[i])
+    # print(memory)
+
 print(checksum)

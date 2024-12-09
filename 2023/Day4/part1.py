@@ -1,7 +1,7 @@
 import re
 import math
 
-with open("input.txt", "r") as puzzleInput:
+with open("2023/Day4/input.txt", "r") as puzzleInput:
     lines = puzzleInput.read().split("\n")
     
 pattern = r"Card\s+\d+:\s([\d\s]+)\|\s([\d\s]+)"

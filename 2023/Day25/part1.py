@@ -19,9 +19,9 @@ for line in lines:
             graph.add_edge(node.group(), lastNode)
 
 
-partition = nx.algorithms.community.edge_betweenness_partition( graph, 2)
+partition = nx.community.edge_betweenness_partition(graph, 2)
 
-print(len(partition[0])*len(partition[1]))
+print(len(partition[0]) * len(partition[1]))
 
 # # Draw the graph
 # nx.draw(graph, with_labels=True)

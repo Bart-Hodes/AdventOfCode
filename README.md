@@ -1,4 +1,4 @@
-# Advent of Code - Total Stars: 34
+# Advent of Code - Total Stars: 38
 
 <details>
 <summary>2015 - Total Stars: 12</summary>
@@ -16,22 +16,22 @@
 </details>
 
 <details>
-<summary>2023 - Total Stars: 4</summary>
+<summary>2023 - Total Stars: 6</summary>
 
 | Day | Part 1 Stars | Part 1 Runtime | Part 2 Stars | Part 2 Runtime |
 |-----|--------------|----------------|--------------|----------------|
 | 1 |  | N/A |  | N/A |
 | 2 |  | N/A |  | N/A |
 | 3 |  | N/A |  | N/A |
-| 4 |  | N/A | ⭐ | 10.89 ms |
+| 4 | ⭐ | 10.22 ms | ⭐ | 10.33 ms |
 | 5 | ⭐ | 11.11 ms |  | N/A |
 | 24 | ⭐ | 192.85 ms | ⭐ | 10.23 ms |
-| 25 |  | N/A |  | N/A |
+| 25 | ⭐ | 10.06 s |  | N/A |
 
 </details>
 
 <details>
-<summary>2024 - Total Stars: 18</summary>
+<summary>2024 - Total Stars: 20</summary>
 
 | Day | Part 1 Stars | Part 1 Runtime | Part 2 Stars | Part 2 Runtime |
 |-----|--------------|----------------|--------------|----------------|
@@ -43,7 +43,8 @@
 | 6 | ⭐ | 40.65 ms | ⭐ | 92.20 s |
 | 7 | ⭐ | 4.69 s | ⭐ | 19.32 s |
 | 8 | ⭐ | 10.02 ms | ⭐ | 11.03 ms |
-| 9 | ⭐ | 6.00 s | ⭐ | 26.72 s |
+| 9 | ⭐ | 6.06 s | ⭐ | 1.38 s |
+| 10 | ⭐ | 11.41 ms | ⭐ | 11.46 ms |
 
 </details>
 

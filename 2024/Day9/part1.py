@@ -1,36 +1,27 @@
 with open("2024/Day9/input.txt") as file:
     fileSystem = file.read().strip()
 
-decompressedMemory = []
-
-# Build decompressedMemory
-i = 0
-while i < len(fileSystem):
-    if i % 2 == 0:
-        for _ in range(int(fileSystem[i])):
-            decompressedMemory.append(str(i // 2))
-    else:
-        decompressedMemory += "." * int(fileSystem[i])
-    i += 1
-
-
-# Modify decompressedMemory by replacing dots
-decompressedMemory = list(decompressedMemory)  # Convert string to a list for mutability
-i = 0
-while i < len(decompressedMemory):
-    if decompressedMemory[i] == ".":
-        if decompressedMemory[-1] != ".":
-            decompressedMemory[i] = decompressedMemory[-1]
-            decompressedMemory = decompressedMemory[:-1]  # Trim the last character
-        if decompressedMemory[i] == ".":
-            decompressedMemory = decompressedMemory[:-1]  # Trim the last character
-            continue
-    i += 1
-
-
-# calculate Checksum
+fileSystem = list(fileSystem)
+count = 0
 checksum = 0
-for idx, fileID in enumerate(decompressedMemory):
-    checksum += idx * int(fileID)
 
+idx = 0
+while idx < len(fileSystem):
+    size = fileSystem[idx]
+    if idx % 2 == 0:
+        for i in range(int(size)):
+            checksum += count * (idx // 2)
+            count += 1
+
+    else:
+        i = 0
+        while i < int(size):
+            if int(fileSystem[-1]) != 0:
+                checksum += len(fileSystem) // 2 * count
+                count += 1
+                fileSystem[-1] = int(fileSystem[-1]) - 1
+                i += 1
+            else:
+                fileSystem = fileSystem[:-2]
+    idx += 1
 print(checksum)

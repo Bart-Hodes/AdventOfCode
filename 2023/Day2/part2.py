@@ -1,7 +1,6 @@
 import re
 
-f = open("input.txt","r")
-# f = open("test.txt","r")
+f = open("2023/Day2/input.txt", "r")
 
 maxRed = 12
 maxGreen = 13
@@ -21,20 +20,20 @@ for line in f:
     minGreen = 0
     minBlue = 0
     for game in subset:
-        match = re.search("((\d*) red)",game)
+        match = re.search("((\d*) red)", game)
         if match != None:
             numRed = int(match.group(2))
         else:
             numRed = 0
-        match = re.search("((\d*) blue)",game)
+        match = re.search("((\d*) blue)", game)
         if match != None:
             numBlue = int(match.group(2))
         else:
             numBlue = 0
-        match = re.search("((\d*) green)",game)
+        match = re.search("((\d*) green)", game)
         if match != None:
             numGreen = int(match.group(2))
-        else: 
+        else:
             numGreen = 0
 
         if minRed < numRed:
@@ -43,20 +42,7 @@ for line in f:
             minBlue = numBlue
         if minGreen < numGreen:
             minGreen = numGreen
-        
-    count += minRed*minBlue*minGreen
-        # print("Red:",numRed)
-        # print("Blue:",numBlue)
-        # print("Green:", numGreen)
 
-        # Check game validity
-        # if not (numRed <= maxRed and numBlue <= maxBlue and numGreen <= maxGreen):
-        #     valid = False
-        #     print("GameFalse")
-
-    # if valid:
-    #     gameIdx = re.search("(Game (\d*))",gameInfo[0]).group(2)
-    #     count += int(gameIdx)
-    #     print(gameIdx)
+    count += minRed * minBlue * minGreen
 
 print(count)

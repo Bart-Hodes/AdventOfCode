@@ -1,4 +1,4 @@
-# Advent of Code - Total Stars: 38
+# Advent of Code - Total Stars: 44
 
 <details>
 <summary>2015 - Total Stars: 12</summary>
@@ -16,13 +16,13 @@
 </details>
 
 <details>
-<summary>2023 - Total Stars: 6</summary>
+<summary>2023 - Total Stars: 12</summary>
 
 | Day | Part 1 Stars | Part 1 Runtime | Part 2 Stars | Part 2 Runtime |
 |-----|--------------|----------------|--------------|----------------|
-| 1 |  | N/A |  | N/A |
-| 2 |  | N/A |  | N/A |
-| 3 |  | N/A |  | N/A |
+| 1 | ⭐ | 11.12 ms | ⭐ | 14.94 ms |
+| 2 | ⭐ | 10.99 ms | ⭐ | 11.36 ms |
+| 3 | ⭐ | 12.47 ms | ⭐ | 11.61 ms |
 | 4 | ⭐ | 10.22 ms | ⭐ | 10.33 ms |
 | 5 | ⭐ | 11.11 ms |  | N/A |
 | 24 | ⭐ | 192.85 ms | ⭐ | 10.23 ms |

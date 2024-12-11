@@ -2,13 +2,6 @@ from aocd import data
 from aocd.models import Puzzle
 
 
-def part_a(data):
-    data = data.split(" ")
-    data = [int(x) for x in data]
-
-    return calcAmountOfStones(data, 25, {})
-
-
 def calcAmountOfStones(stones, count, cache):
     if count == 0:
         return len(stones)
@@ -37,12 +30,21 @@ def TransformStones(stone):
     return result
 
 
+def part_a(data):
+    data = data.split(" ")
+    data = [int(x) for x in data]
+
+    return calcAmountOfStones(data, 25, {})
+
+
 def part_b(data):
     data = data.split(" ")
     data = [int(x) for x in data]
 
     return calcAmountOfStones(data, 75, {})
 
+
+import time
 
 if __name__ == "__main__":
     puzzle = Puzzle(2024, 11)

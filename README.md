@@ -1,50 +1,52 @@
-# Advent of Code - Total Stars: 44
+# Advent of Code - Total Stars: 49
 
 <details>
 <summary>2015 - Total Stars: 12</summary>
 
-| Day | Part 1 Stars | Part 1 Runtime | Part 2 Stars | Part 2 Runtime |
+| Day | Part A Stars | Part A Runtime | Part B Stars | Part B Runtime |
 |-----|--------------|----------------|--------------|----------------|
-| 1 | ⭐ | 9.58 ms | ⭐ | 8.84 ms |
-| 2 | ⭐ | 8.94 ms | ⭐ | 8.94 ms |
-| 3 | ⭐ | 9.57 ms | ⭐ | 9.88 ms |
-| 4 | ⭐ | 170.44 ms | ⭐ | 4.60 s |
-| 5 | ⭐ | 10.66 ms | ⭐ | 12.23 ms |
-| 6 | ⭐ | 969.79 ms | ⭐ | 1.67 s |
-| 7 |  | N/A |  | N/A |
+| 1 | ⭐ | 1.78 ms | ⭐ | 292.06 µs |
+| 2 | ⭐ | 1.95 ms | ⭐ | 1.05 ms |
+| 3 | ⭐ | 3.52 ms | ⭐ | 3.09 ms |
+| 4 | ⭐ | 339.53 ms | ⭐ | 9.55 s |
+| 5 | ⭐ | 2.75 ms | ⭐ | 2.15 ms |
+| 6 | ⭐ | 1.53 s | ⭐ | 2.75 s |
 
 </details>
 
 <details>
 <summary>2023 - Total Stars: 12</summary>
 
-| Day | Part 1 Stars | Part 1 Runtime | Part 2 Stars | Part 2 Runtime |
+| Day | Part A Stars | Part A Runtime | Part B Stars | Part B Runtime |
 |-----|--------------|----------------|--------------|----------------|
-| 1 | ⭐ | 11.12 ms | ⭐ | 14.94 ms |
-| 2 | ⭐ | 10.99 ms | ⭐ | 11.36 ms |
-| 3 | ⭐ | 12.47 ms | ⭐ | 11.61 ms |
-| 4 | ⭐ | 10.22 ms | ⭐ | 10.33 ms |
-| 5 | ⭐ | 11.11 ms |  | N/A |
-| 24 | ⭐ | 192.85 ms | ⭐ | 10.23 ms |
-| 25 | ⭐ | 10.06 s |  | N/A |
+| 1 | ⭐ | 2.77 ms | ⭐ | 22.67 ms |
+| 2 | ⭐ | 4.06 ms | ⭐ | 1.55 ms |
+| 3 | ⭐ | 5.59 ms | ⭐ | 5.31 ms |
+| 4 | ⭐ | 4.70 ms | ⭐ | 3.41 ms |
+| 5 | ⭐ | 3.67 ms |  | N/A |
+| 24 | ⭐ | 296.21 ms | ⭐ | 999.69 µs |
+| 25 | ⭐ | 23.42 s |  | N/A |
 
 </details>
 
 <details>
-<summary>2024 - Total Stars: 20</summary>
+<summary>2024 - Total Stars: 25</summary>
 
-| Day | Part 1 Stars | Part 1 Runtime | Part 2 Stars | Part 2 Runtime |
+| Day | Part A Stars | Part A Runtime | Part B Stars | Part B Runtime |
 |-----|--------------|----------------|--------------|----------------|
-| 1 | ⭐ | 8.44 ms | ⭐ | 12.16 ms |
-| 2 | ⭐ | 9.80 ms | ⭐ | 13.74 ms |
-| 3 | ⭐ | 9.55 ms | ⭐ | 9.90 ms |
-| 4 | ⭐ | 16.84 ms | ⭐ | 12.45 ms |
-| 5 | ⭐ | 17.01 ms | ⭐ | 55.35 ms |
-| 6 | ⭐ | 40.65 ms | ⭐ | 92.20 s |
-| 7 | ⭐ | 4.69 s | ⭐ | 19.32 s |
-| 8 | ⭐ | 10.02 ms | ⭐ | 11.03 ms |
-| 9 | ⭐ | 104.55 ms | ⭐ | 1.43 s |
-| 10 | ⭐ | 11.41 ms | ⭐ | 11.46 ms |
+| 1 | ⭐ | 2.18 ms | ⭐ | 13.86 ms |
+| 2 | ⭐ | 4.12 ms | ⭐ | 15.54 ms |
+| 3 | ⭐ | 1.26 ms | ⭐ | 929.59 µs |
+| 4 | ⭐ | 21.52 ms | ⭐ | 11.48 ms |
+| 5 | ⭐ | 30.33 ms | ⭐ | 88.53 ms |
+| 6 | ⭐ | 93.95 ms | ⭐ | 289.29 s |
+| 7 | ⭐ | 13.26 s | ⭐ | 41.64 s |
+| 8 | ⭐ | 990.15 µs | ⭐ | 1.23 ms |
+| 9 | ⭐ | 156.45 ms | ⭐ | 2.80 s |
+| 10 | ⭐ | 10.53 ms | ⭐ | 10.92 ms |
+| 11 | ⭐ | 8.70 ms | ⭐ | 201.41 ms |
+| 12 | ⭐ | 29.23 ms |  | N/A |
+| 13 | ⭐ | 1.51 ms | ⭐ | 715.02 µs |
 
 </details>
 

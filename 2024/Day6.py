@@ -4,14 +4,10 @@ from aocd.models import Puzzle
 
 def findCycle(graph, start):
     visited = set()
-    print(graph)
     while True:
-        print(start)
         if start not in graph:
             return False
         if start in visited:
-            print("Cycle detected")
-            print(visited)
             return True
         visited.add(start)
 
@@ -119,7 +115,103 @@ def part_a(data):
     return len(visited)
 
 
+def loopDetectorPartB(obstacleList, pos, direction, lines):
+    visited = set()
+    visited.add((pos, direction))
+    while True:
+        # Check if the next step is an obstacle
+        nextStep = (pos[0] + direction[0], pos[1] + direction[1])
+
+        if (
+            nextStep[0] >= len(lines[0])
+            or nextStep[1] >= len(lines)
+            or nextStep[0] < 0
+            or nextStep[1] < 0
+        ):
+            break
+
+        if (nextStep, direction) in visited:
+            # print("Loop detected")
+            # debugPrint(input, pos, [x[0] for x in visited])
+            return True
+
+        if nextStep in obstacleList:
+            # Turn right
+            direction = (-direction[1], direction[0])
+        else:
+            pos = nextStep
+            visited.add((pos, direction))
+    # debugPrint(input, pos, [x[0] for x in visited])
+    return False
+
+
+def findGuardPathPartB(lines, pos, direction, obstacleList):
+    visited = set()
+    while True:
+        # Check if the next step is an obstacle
+        nextStep = (pos[0] + direction[0], pos[1] + direction[1])
+
+        if (
+            nextStep[0] >= len(lines[0])
+            or nextStep[1] >= len(lines)
+            or nextStep[0] < 0
+            or nextStep[1] < 0
+        ):
+            break
+
+        if nextStep in obstacleList:
+            # Turn right
+            direction = (-direction[1], direction[0])
+        else:
+            pos = nextStep
+            visited.add(pos)
+
+    return visited
+
+
 def part_b(data):
+    lines = data.split("\n")
+
+    obstacleList = []
+    start = None
+    direction = None
+    for y, line in enumerate(lines):
+        for x, char in enumerate(line):
+            if char == "#":
+                obstacleList.append((x, y))
+            elif char == "^":
+                start = (x, y)
+                direction = (0, -1)
+            elif char == "v":
+                start = (x, y)
+                direction = (0, 1)
+            elif char == ">":
+                start = (x, y)
+                direction = (1, 0)
+            elif char == "<":
+                start = (x, y)
+                direction = (-1, 0)
+
+    pos = start
+
+    # It only makes sense to check obstables placed in the guards path
+    guardPath = findGuardPathPartB(lines, pos, direction, obstacleList)
+
+    count = 0
+    previousPos = pos
+    # iterativly search the guards path for loops
+    for newObstacle in guardPath:
+        obstacleListAppended = obstacleList.copy()
+        obstacleListAppended.append(newObstacle)
+
+        if loopDetectorPartB(obstacleListAppended, pos, direction, lines):
+            count += 1
+        previousPos = newObstacle
+
+    return count
+
+
+def performance_part_b(data):
     data = data.split("\n")
 
     obstacleList = []
@@ -158,6 +250,7 @@ def part_b(data):
             count += 1
         previousPos = newObstacle
         print(count)
+    return count
 
 
 if __name__ == "__main__":

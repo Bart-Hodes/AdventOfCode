@@ -165,8 +165,8 @@ def calculate_disconnected_sides_and_area(grid):
                             visited[nx][ny] = True
                             stack.append((nx, ny))
 
-        print(f"area: {area}")
-        print(f"sides: {sides}")
+        # print(f"area: {area}")
+        # print(f"sides: {sides}")
         return sides, area
 
     # Iterate over the grid
@@ -178,7 +178,7 @@ def calculate_disconnected_sides_and_area(grid):
                 perimeters.append(
                     (grid[i][j], region_perimeter[0] * region_perimeter[1])
                 )
-                print(visited)
+                # print(visited)
 
     return perimeters
 
@@ -194,24 +194,24 @@ def part_a(data):
     return fenceLenght
 
 
-def part_b(data):
+# def part_b(data):
 
-    data = """OOOOO
-OXOXO
-OOOOO
-OXOXO
-OOOOO"""
+#     data = """OOOOO
+# OXOXO
+# OOOOO
+# OXOXO
+# OOOOO"""
 
-    data = data.split("\n")
+#     data = data.split("\n")
 
-    fenceLenght = 0
+#     fenceLenght = 0
 
-    for item in calculate_disconnected_sides_and_area(data):
-        fenceLenght += item[1]
+#     for item in calculate_disconnected_sides_and_area(data):
+#         fenceLenght += item[1]
 
-    print(fenceLenght)
+#     print(fenceLenght)
 
-    return fenceLenght
+#     return fenceLenght
 
 
 if __name__ == "__main__":

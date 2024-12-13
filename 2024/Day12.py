@@ -22,7 +22,6 @@ def calculate_disconnected_perimeters_and_area(grid):
         while stack:
             cx, cy = stack.pop()
             area += 1
-
             interior_edges = 0
 
             for dx, dy in directions:
@@ -31,9 +30,9 @@ def calculate_disconnected_perimeters_and_area(grid):
                     if grid[nx][ny] == char:
                         interior_edges += 1
 
-                    if not visited[nx][ny]:
-                        visited[nx][ny] = True
-                        stack.append((nx, ny))
+                        if not visited[nx][ny]:
+                            visited[nx][ny] = True
+                            stack.append((nx, ny))
 
         perimeter = 2 * area - 2 * interior_edges + 2
         return perimeter, area
@@ -65,7 +64,7 @@ def calculate_disconnected_sides_and_area(grid):
     # AA
     # In all orientations
 
-    pattern = [(0, 1), (1, 0), (1, 1)]
+    pattern = [(0, 1), (1, 0), (1, 1), (2, 2)]
     # Create all orientations of the pattern
     patterns = [pattern]
     for _ in range(3):
@@ -88,18 +87,26 @@ def calculate_disconnected_sides_and_area(grid):
                 if 0 <= nx < rows and 0 <= ny < cols:
                     if grid[nx][ny] == char:
 
+                        # it breaks when it finds a pattern like
+                        # AAA
+                        # AXA
+                        # AAA
+
                         # Check neighbors
-                        for d1, d2, d3 in patterns:
+                        for d1, d2, d3, d4 in patterns:
                             dx1, dy1 = d1
                             dx2, dy2 = d2
                             dx3, dy3 = d3
-                            nx1, ny1, nx2, ny2, nx3, ny3 = (
+                            dx4, dy4 = d4
+                            nx1, ny1, nx2, ny2, nx3, ny3, nx4, ny4 = (
                                 cx + dx1,
                                 cy + dy1,
                                 cx + dx2,
                                 cy + dy2,
                                 cx + dx3,
                                 cy + dy3,
+                                cx + dx4,
+                                cy + dy4,
                             )
                             if (
                                 0 <= nx1 < rows
@@ -115,13 +122,51 @@ def calculate_disconnected_sides_and_area(grid):
                                     and grid[nx3][ny3] != char
                                     and not visited[nx][ny]
                                 ):
-                                    sides += 2
+                                    if 0 <= nx4 < rows and 0 <= ny4 < cols:
+                                        if grid[nx4][ny4] == char:
+                                            sides += 1
+                                            print(f"nx: {nx}, ny: {ny}")
+                                            print(d1, d2, d3, d4)
+                                            print(
+                                                grid[nx][ny],
+                                                grid[nx1][ny1],
+                                                grid[nx2][ny2],
+                                                grid[nx3][ny3],
+                                                grid[nx4][ny4],
+                                            )
+                                            print(
+                                                nx,
+                                                ny,
+                                            )
+                                            print(
+                                                nx1,
+                                                ny1,
+                                            )
+                                            print(
+                                                nx2,
+                                                ny2,
+                                            )
+                                            print(
+                                                nx3,
+                                                ny3,
+                                            )
+                                            print(
+                                                nx4,
+                                                ny4,
+                                            )
+                                        else:
+
+                                            sides += 2
+                                    else:
+                                        sides += 2
+
                         if not visited[nx][ny]:
                             area += 1
                             visited[nx][ny] = True
                             stack.append((nx, ny))
-        print(sides, area)
 
+        print(f"area: {area}")
+        print(f"sides: {sides}")
         return sides, area
 
     # Iterate over the grid

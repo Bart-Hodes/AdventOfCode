@@ -1,89 +1,91 @@
-def calculate_disconnected_sides_and_area(grid):
-    rows, cols = len(grid), len(grid[0])
-    visited = [[False] * cols for _ in range(rows)]
+def count_regions_and_calculate_prices(map_data):
+    def find_neighbors(x, y, map_data):
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        neighbors = []
+        for dx, dy in directions:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < len(map_data) and 0 <= ny < len(map_data[0]):
+                neighbors.append((nx, ny))
+        return neighbors
 
-    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-    pattern = [(0, 1), (1, 0), (1, 1), (2, 2)]
-    patterns = [pattern]
-    for _ in range(3):
-        pattern = [(dy, -dx) for dx, dy in pattern]
-        patterns.append(pattern)
+    def bfs_find_region(x, y, map_data):
+        visited = set()
+        queue = [(x, y)]
+        while queue:
+            cx, cy = queue.pop(0)
+            if (cx, cy) not in visited and map_data[cx][cy] == current_region_type:
+                visited.add((cx, cy))
+                for nx, ny in find_neighbors(cx, cy, map_data):
+                    if map_data[nx][ny] == current_region_type:
+                        queue.append((nx, ny))
+        return visited
 
-    def flood_fill(x, y):
-        stack = [(x, y)]
-        visited[x][y] = True
-        char = grid[x][y]
-        sides = 4
-        area = 1
-        while stack:
-            cx, cy = stack.pop()
-            for dx, dy in directions:
-                nx, ny = cx + dx, cy + dy
-                if 0 <= nx < rows and 0 <= ny < cols:
-                    if grid[nx][ny] == char and not visited[nx][ny]:
-                        for d1, d2, d3, d4 in patterns:
-                            dx1, dy1 = d1
-                            dx2, dy2 = d2
-                            dx3, dy3 = d3
-                            dx4, dy4 = d4
-                            nx1, ny1, nx2, ny2, nx3, ny3, nx4, ny4 = (
-                                nx + dx1,
-                                ny + dy1,
-                                nx + dx2,
-                                ny + dy2,
-                                nx + dx3,
-                                ny + dy3,
-                                nx + dx4,
-                                ny + dy4,
-                            )
-                            if (
-                                0 <= nx1 < rows
-                                and 0 <= ny1 < cols
-                                and 0 <= nx2 < rows
-                                and 0 <= ny2 < cols
-                                and 0 <= nx3 < rows
-                                and 0 <= ny3 < cols
-                            ):
-                                if (
-                                    grid[nx1][ny1] == char
-                                    and grid[nx2][ny2] == char
-                                    and grid[nx3][ny3] != char
-                                ):
-                                    if 0 <= nx4 < rows and 0 <= ny4 < cols:
-                                        if grid[nx4][ny4] == char:
-                                            print(d4)
-                                            print("nx: ", nx, "ny: ", ny)
-                                            print("nx1 ", nx1, "ny1 ", ny1)
-                                            print("nx2 ", nx2, "ny2 ", ny2)
-                                            print("nx3 ", nx3, "ny3 ", ny3)
-                                            if d4 == (2, 2):
-                                                sides += 4
-                                                print("Inner sides", sides)
-                                        else:
-                                            sides += 2
-                                            print("Outer sides", sides)
-                    if not visited[nx][ny] and grid[nx][ny] == char:
-                        area += 1
-                        visited[nx][ny] = True
-                        stack.append((nx, ny))
-        print(sides, area)
-        return sides, area
+    def calculate_perimeter(region):
+        perimeter = 0
+        for x, y in region:
+            neighbors = find_neighbors(x, y, map_data)
+            # Count the number of None or non-region neighbors (i.e., perimeter)
+            for nx, ny in neighbors + [
+                (None, None)
+            ]:  # Add a dummy pair to handle len 0 or 1
+                if nx is None or ny is None or (nx, ny) not in region:
+                    perimeter += 1
+        return perimeter
 
-    for i in range(rows):
-        for j in range(cols):
-            if not visited[i][j]:
-                region_perimeter = flood_fill(i, j)
-                # perimeters.append(
-                #     (grid[i][j], region_perimeter[0] * region_perimeter[1])
-                # )
+    def calculate_sides(region):
+        sides = 0
+        for x, y in region:
+            neighbors = find_neighbors(x, y, map_data)
+            # Count the number of None neighbors (i.e., sides)
+            for nx, ny in neighbors + [
+                (None, None)
+            ]:  # Add a dummy pair to handle len 0 or 1
+                if nx is None or ny is None:
+                    sides += 1
+        return sides
 
-    return None
+    regions = []
+    visited_cells = set()
+    for i in range(len(map_data)):
+        for j in range(len(map_data[0])):
+            if (i, j) not in visited_cells and map_data[i][
+                j
+            ] != " ":  # Assuming spaces are empty cells
+                current_region_type = map_data[i][j]
+                region = bfs_find_region(i, j, map_data)
+                regions.append(region)
+                visited_cells.update(region)
+
+    total_price_part1 = 0
+    total_price_part2 = 0
+
+    for region in regions:
+        area = len(region)
+        perimeter = calculate_perimeter(region)
+        sides = calculate_sides(region)
+        print(area, perimeter, sides)
+
+        # Assuming price calculation based on some criteria (replace with actual logic)
+        total_price_part1 += area * perimeter
+        total_price_part2 += area * sides
+
+    return total_price_part1, total_price_part2
 
 
-data = """OOOOO
-OXOXO
-OOOOO
-OXOXO
-OOOOO"""
-data = data.split("\n")
-calculate_disconnected_sides_and_area(data)
+# Example usage
+map_data = [
+    "RRRRIICCFF",
+    "RRRRIICCCF",
+    "VVRRRCCFFF",
+    "VVRCCCJFFF",
+    "VVVVCJJCFE",
+    "VVIVCCJJEE",
+    "VVIIICJJEE",
+    "MIIIIIJJEE",
+    "MIIISIJEEE",
+    "MMMISSJEEE",
+]
+
+part1, part2 = count_regions_and_calculate_prices(map_data)
+print(f"Part 1 total price: {part1}")
+print(f"Part 2 total price: {part2}")

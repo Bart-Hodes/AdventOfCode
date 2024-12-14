@@ -194,24 +194,24 @@ def part_a(data):
     return fenceLenght
 
 
-# def part_b(data):
+def part_b(data):
 
-#     data = """OOOOO
-# OXOXO
-# OOOOO
-# OXOXO
-# OOOOO"""
+    data = """OOOOO
+OXOXO
+OOOOO
+OXOXO
+OOOOO"""
 
-#     data = data.split("\n")
+    data = data.split("\n")
 
-#     fenceLenght = 0
+    fenceLenght = 0
 
-#     for item in calculate_disconnected_sides_and_area(data):
-#         fenceLenght += item[1]
+    for item in calculate_disconnected_sides_and_area(data):
+        fenceLenght += item[1]
 
-#     print(fenceLenght)
+    print(fenceLenght)
 
-#     return fenceLenght
+    return fenceLenght
 
 
 if __name__ == "__main__":

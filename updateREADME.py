@@ -21,13 +21,21 @@ def get_solution_files(year):
     )
 
 
-def run_solution(year, day, part, puzzle_data):
+def run_solution(year, day, part, puzzle):
     """Run the solution function (part_a or part_b) and measure runtime."""
     module_name = f"{year}.Day{day}"
     try:
         start_time = time.time()
         solution_module = import_module(module_name)
-        result = getattr(solution_module, f"part_{part}")(puzzle_data)
+        result = getattr(solution_module, f"part_{part}")(puzzle.input_data)
+        if part == "a":
+            assert int(result) == int(
+                puzzle.answer_a
+            ), f"Expected: {puzzle.answer_a}, got: {result}"
+        else:
+            assert int(result) == int(
+                puzzle.answer_b
+            ), f"Expected: {puzzle.answer_b}, got: {result}"
         runtime = time.time() - start_time
         return runtime
     except Exception as e:
@@ -121,13 +129,13 @@ def main():
 
             # Run part_a and record runtime
             print(f"Running {year}/Day{day} - part_a")
-            runtime_a = run_solution(year, day, "a", puzzle.input_data)
+            runtime_a = run_solution(year, day, "a", puzzle)
             stars_part_a[day] = 1 if runtime_a is not None else 0
             runtimes_part_a[day] = runtime_a
 
             # Run part_b and record runtime
             print(f"Running {year}/Day{day} - part_b")
-            runtime_b = run_solution(year, day, "b", puzzle.input_data)
+            runtime_b = run_solution(year, day, "b", puzzle)
             stars_part_b[day] = 1 if runtime_b is not None else 0
             runtimes_part_b[day] = runtime_b
 

@@ -209,8 +209,6 @@ OOOOO"""
     for item in calculate_disconnected_sides_and_area(data):
         fenceLenght += item[1]
 
-    print(fenceLenght)
-
     return fenceLenght
 
 

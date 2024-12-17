@@ -61,31 +61,31 @@ def part_a(data):
     return min(seedIds)
 
 
-def part_b(data):
-    lines = data.split("\n")
-    lines[-1] += "\n"
+# def part_b(data):
+#     lines = data.split("\n")
+#     lines[-1] += "\n"
 
-    # Parse seed ranges from the first line
-    seedRanges = re.findall(r"\d+", lines[0])
-    seed_ranges = []
-    for i in range(0, len(seedRanges), 2):
-        start = int(seedRanges[i])
-        length = int(seedRanges[i + 1])
-        seed_ranges.append((start, length))
+#     # Parse seed ranges from the first line
+#     seedRanges = re.findall(r"\d+", lines[0])
+#     seed_ranges = []
+#     for i in range(0, len(seedRanges), 2):
+#         start = int(seedRanges[i])
+#         length = int(seedRanges[i + 1])
+#         seed_ranges.append((start, length))
 
-    # Get maps
-    Maps = re.findall(r"(?:\d+ \d+ \d+\n)+", "\n".join(lines[1:]), re.MULTILINE)
+#     # Get maps
+#     Maps = re.findall(r"(?:\d+ \d+ \d+\n)+", "\n".join(lines[1:]), re.MULTILINE)
 
-    for map_data in Maps:
-        new_ranges = []
-        for start, length in seed_ranges:
-            for rule in map_data.splitlines():
-                if rule.strip():
-                    new_ranges.extend(map_range(start, length, rule.split()))
-        seed_ranges = new_ranges
+#     for map_data in Maps:
+#         new_ranges = []
+#         for start, length in seed_ranges:
+#             for rule in map_data.splitlines():
+#                 if rule.strip():
+#                     new_ranges.extend(map_range(start, length, rule.split()))
+#         seed_ranges = new_ranges
 
-    seedIds = [start for start, length in seed_ranges]
-    return min(seedIds)
+#     seedIds = [start for start, length in seed_ranges]
+#     return min(seedIds)
 
 
 if __name__ == "__main__":

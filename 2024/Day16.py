@@ -4,7 +4,6 @@ import time
 
 
 def printMaze(walls, start, end):
-
     time.sleep(0.1)
     for y in range(15):
         for x in range(15):
@@ -113,18 +112,12 @@ def findScoreDijkstraWithPathTracking(start, end, orientation, walls):
             and priorityQueue[0][0] == score
             and priorityQueue[0][1] == current
         ):
-            print("Multiple paths to the end")
             path.update(priorityQueue[0][3])
             priorityQueue.pop(0)
-
-        # printPath(path, walls, start, end)
 
         # If we reach the end, return the score
         if current == end:
             return path
-
-        # if (current, current_orientation) in visited:
-        #     continue
 
         visited.add((current, current_orientation))
 
@@ -185,7 +178,7 @@ def part_a(data):
     orientation = (1, 0)  # Initial orientation is to the right
     score = findScoreDijkstra(start, end, orientation, walls)
 
-    print(score)
+    # print(score)
 
     return score
 
@@ -209,15 +202,12 @@ def part_b(data):
     orientation = (1, 0)  # Initial orientation is to the right
     path = findScoreDijkstraWithPathTracking(start, end, orientation, walls)
 
-    printPath(path, walls, start, end)
+    # printPath(path, walls, start, end)
 
     return len(path)
 
 
 if __name__ == "__main__":
     puzzle = Puzzle(year=2024, day=16)
-    # data = puzzle.input_data
-    # print(part_a(data))
-    # print(part_b(data))
-    # puzzle.answer_a = part_a(puzzle.input_data)
+    puzzle.answer_a = part_a(puzzle.input_data)
     puzzle.answer_b = part_b(puzzle.input_data)

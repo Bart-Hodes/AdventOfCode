@@ -1,7 +1,6 @@
 from aocd.models import Puzzle
 
 import time
-import heapq
 
 
 def printMaze(walls, start, end):
@@ -21,16 +20,37 @@ def printMaze(walls, start, end):
     print("")
 
 
-def findScoreDijkstra(start, end, orientation, walls):
+def printPath(path, walls, start, end):
+    time.sleep(0.1)
+    for y in range(140):
+        for x in range(140):
+            if (x, y) in walls:
+                print("#", end="")
+            elif (x, y) == start:
+                print("S", end="")
+            elif (x, y) == end:
+                print("E", end="")
+            elif (x, y) in path:
+                print("X", end="")
+            else:
+                print(".", end="")
+        print("")
+    print("")
 
+
+def findScoreDijkstra(start, end, orientation, walls):
     # Priority queue for Dijkstra's algorithm: (score, position, orientation)
-    pq = [(0, start, orientation)]
+    priorityQueue = [(0, start, orientation)]
 
     # Visited set to track visited positions and orientations
     visited = set()
 
-    while pq:
-        score, current, current_orientation = heapq.heappop(pq)
+    while priorityQueue:
+        # Sort the priority queue based on score (smallest first)
+        priorityQueue.sort(key=lambda x: x[0])
+
+        # Pop the element with the smallest score
+        score, current, current_orientation = priorityQueue.pop(0)
 
         # If we reach the end, return the score
         if current == end:
@@ -50,42 +70,61 @@ def findScoreDijkstra(start, end, orientation, walls):
             forward_pos not in walls
             and (forward_pos, current_orientation) not in visited
         ):
-            heapq.heappush(pq, (score + 1, forward_pos, current_orientation))
+            priorityQueue.append((score + 1, forward_pos, current_orientation))
 
         # Turn left
         left_orientation = (-dy, dx)
         left_pos = (x + left_orientation[0], y + left_orientation[1])
         if left_pos not in walls and (left_pos, left_orientation) not in visited:
-            heapq.heappush(pq, (score + 1001, left_pos, left_orientation))
+            priorityQueue.append((score + 1001, left_pos, left_orientation))
 
         # Turn right
         right_orientation = (dy, -dx)
         right_pos = (x + right_orientation[0], y + right_orientation[1])
         if right_pos not in walls and (right_pos, right_orientation) not in visited:
-            heapq.heappush(pq, (score + 1001, right_pos, right_orientation))
+            priorityQueue.append((score + 1001, right_pos, right_orientation))
 
     # If we exhaust the queue without finding the end, return infinity
     return float("inf")
 
 
-def findScoreDijkstraPartB(start, end, orientation, walls):
-
+def findScoreDijkstraWithPathTracking(start, end, orientation, walls):
     # Priority queue for Dijkstra's algorithm: (score, position, orientation)
-    pq = [(0, start, orientation)]
+
+    path = set()
+    path.add(start)
+    priorityQueue = [(0, start, orientation, path)]
 
     # Visited set to track visited positions and orientations
     visited = set()
 
-    while pq:
-        score, current, current_orientation = heapq.heappop(pq)
-        printMaze(walls, current, end)
+    while priorityQueue:
+
+        # Sort the priority queue based on score (smallest first)
+        priorityQueue.sort(key=lambda x: x[0])
+
+        # Pop the element with the smallest score
+        score, current, current_orientation, path = priorityQueue.pop(0)
+
+        # If the two lowest scores are the same, we have multiple paths to the end
+        # We need to keep track of all of them so we merge them into one path
+        if (
+            priorityQueue
+            and priorityQueue[0][0] == score
+            and priorityQueue[0][1] == current
+        ):
+            print("Multiple paths to the end")
+            path.update(priorityQueue[0][3])
+            priorityQueue.pop(0)
+
+        # printPath(path, walls, start, end)
 
         # If we reach the end, return the score
         if current == end:
-            return score
+            return path
 
-        if (current, current_orientation) in visited:
-            continue
+        # if (current, current_orientation) in visited:
+        #     continue
 
         visited.add((current, current_orientation))
 
@@ -98,19 +137,29 @@ def findScoreDijkstraPartB(start, end, orientation, walls):
             forward_pos not in walls
             and (forward_pos, current_orientation) not in visited
         ):
-            heapq.heappush(pq, (score + 1, forward_pos, current_orientation))
+            forwardPath = path.copy()
+            forwardPath.add(forward_pos)
+            priorityQueue.append(
+                (score + 1, forward_pos, current_orientation, forwardPath)
+            )
 
         # Turn left
         left_orientation = (-dy, dx)
         left_pos = (x + left_orientation[0], y + left_orientation[1])
         if left_pos not in walls and (left_pos, left_orientation) not in visited:
-            heapq.heappush(pq, (score + 1001, left_pos, left_orientation))
+            leftPath = path.copy()
+            leftPath.add(left_pos)
+            priorityQueue.append((score + 1001, left_pos, left_orientation, leftPath))
 
         # Turn right
         right_orientation = (dy, -dx)
         right_pos = (x + right_orientation[0], y + right_orientation[1])
         if right_pos not in walls and (right_pos, right_orientation) not in visited:
-            heapq.heappush(pq, (score + 1001, right_pos, right_orientation))
+            rightPath = path.copy()
+            rightPath.add(right_pos)
+            priorityQueue.append(
+                (score + 1001, right_pos, right_orientation, rightPath)
+            )
 
     # If we exhaust the queue without finding the end, return infinity
     return float("inf")
@@ -142,7 +191,6 @@ def part_a(data):
 
 
 def part_b(data):
-
     data = data.split("\n")
 
     walls = set()
@@ -159,21 +207,17 @@ def part_b(data):
                 end = (x, y)
 
     orientation = (1, 0)  # Initial orientation is to the right
-    score = findScoreDijkstraPartB(start, end, orientation, walls)
+    path = findScoreDijkstraWithPathTracking(start, end, orientation, walls)
 
-    print(score)
+    printPath(path, walls, start, end)
 
-    return score
-
-    return None
+    return len(path)
 
 
 if __name__ == "__main__":
     puzzle = Puzzle(year=2024, day=16)
     # data = puzzle.input_data
-    examples = puzzle.examples
-    for example in examples:
-        part_b(example.input_data)
     # print(part_a(data))
     # print(part_b(data))
     # puzzle.answer_a = part_a(puzzle.input_data)
+    puzzle.answer_b = part_b(puzzle.input_data)

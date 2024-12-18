@@ -59,125 +59,37 @@ def calculate_disconnected_sides_and_area(grid):
     # Directions for neighbors (top, bottom, left, right)
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-    # Search for pattern
-    # AX
-    # AA
-    # In all orientations
-
-    pattern = [(0, 1), (1, 0), (1, 1), (2, 2)]
-    # Create all orientations of the pattern
-    patterns = [pattern]
-    for _ in range(3):
-        pattern = [(dy, -dx) for dx, dy in pattern]
-        patterns.append(pattern)
-
     def flood_fill(x, y):
         # Perform flood fill and calculate perimeter
         stack = [(x, y)]
         visited[x][y] = True
         char = grid[x][y]
-        sides = 4
-        area = 1
+        perimeter = 0
+        area = 0
 
         while stack:
             cx, cy = stack.pop()
+            area += 1
+            interior_edges = 0
 
             for dx, dy in directions:
                 nx, ny = cx + dx, cy + dy
                 if 0 <= nx < rows and 0 <= ny < cols:
-                    if grid[nx][ny] == char:
+                    if grid[nx][ny] == char and (nx, ny) not in visited:
 
-                        # it breaks when it finds a pattern like
-                        # AAA
-                        # AXA
-                        # AAA
 
-                        # Check neighbors
-                        for d1, d2, d3, d4 in patterns:
-                            dx1, dy1 = d1
-                            dx2, dy2 = d2
-                            dx3, dy3 = d3
-                            dx4, dy4 = d4
-                            nx1, ny1, nx2, ny2, nx3, ny3, nx4, ny4 = (
-                                cx + dx1,
-                                cy + dy1,
-                                cx + dx2,
-                                cy + dy2,
-                                cx + dx3,
-                                cy + dy3,
-                                cx + dx4,
-                                cy + dy4,
-                            )
-                            if (
-                                0 <= nx1 < rows
-                                and 0 <= ny1 < cols
-                                and 0 <= nx2 < rows
-                                and 0 <= ny2 < cols
-                                and 0 <= nx3 < rows
-                                and 0 <= ny3 < cols
-                            ):
-                                if (
-                                    grid[nx1][ny1] == char
-                                    and grid[nx2][ny2] == char
-                                    and grid[nx3][ny3] != char
-                                    and not visited[nx][ny]
-                                ):
-                                    if 0 <= nx4 < rows and 0 <= ny4 < cols:
-                                        if grid[nx4][ny4] == char:
-                                            sides += 1
-                                            print(f"nx: {nx}, ny: {ny}")
-                                            print(d1, d2, d3, d4)
-                                            print(
-                                                grid[nx][ny],
-                                                grid[nx1][ny1],
-                                                grid[nx2][ny2],
-                                                grid[nx3][ny3],
-                                                grid[nx4][ny4],
-                                            )
-                                            print(
-                                                nx,
-                                                ny,
-                                            )
-                                            print(
-                                                nx1,
-                                                ny1,
-                                            )
-                                            print(
-                                                nx2,
-                                                ny2,
-                                            )
-                                            print(
-                                                nx3,
-                                                ny3,
-                                            )
-                                            print(
-                                                nx4,
-                                                ny4,
-                                            )
-                                        else:
-
-                                            sides += 2
-                                    else:
-                                        sides += 2
-
-                        if not visited[nx][ny]:
-                            area += 1
-                            visited[nx][ny] = True
-                            stack.append((nx, ny))
-
-        # print(f"area: {area}")
-        # print(f"sides: {sides}")
-        return sides, area
+        return perimeter, area
 
     # Iterate over the grid
+    print(grid)
     for i in range(rows):
         for j in range(cols):
             if not visited[i][j]:
                 # Start a new region
-                region_perimeter = flood_fill(i, j)
-                perimeters.append(
-                    (grid[i][j], region_perimeter[0] * region_perimeter[1])
-                )
+                region_perimeter = flood_fill(i, j, grid[i][j])
+                # perimeters.append(
+                #     (grid[i][j], region_perimeter[0] * region_perimeter[1])
+                # )
                 # print(visited)
 
     return perimeters

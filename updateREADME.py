@@ -90,7 +90,7 @@ def generate_readme(all_data):
         if total_year_stars == 0:
             continue  # Skip years with no solved days
 
-        readme_content += f"<details>\n<summary>{year} - Total Stars: {total_year_stars}</summary>\n\n"
+        readme_content += f"<details>\n<summary> {year} - Total Stars: {total_year_stars}</summary>\n\n"
         readme_content += (
             "| Day | Part A Stars | Part A Runtime | Part B Stars | Part B Runtime |\n"
         )
@@ -104,9 +104,7 @@ def generate_readme(all_data):
             stars_b = "⭐" * year_data["stars"]["part_b"].get(day, 0)
             runtime_b = format_runtime(year_data["runtimes"]["part_b"].get(day))
 
-            readme_content += (
-                f"| {day} | {stars_a} | {runtime_a} | {stars_b} | {runtime_b} |\n"
-            )
+            readme_content += f"| [{day}](https://adventofcode.com/{year}/day/{day}) | {stars_a} | {runtime_a} | {stars_b} | {runtime_b} |\n"
 
         readme_content += "\n</details>\n\n"
 

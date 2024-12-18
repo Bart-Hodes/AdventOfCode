@@ -129,7 +129,7 @@ def part_b(data):
         return None  # No valid continuation found
 
     # Start the recursive search from the first digit
-    return int(find_final_regA(data, programOutput, regA=0, idx=0))
+    return str(int(find_final_regA(data, programOutput, regA=0, idx=0)))
 
 
 if __name__ == "__main__":

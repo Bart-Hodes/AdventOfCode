@@ -138,7 +138,7 @@ def part_a(data):
     start = (0, 0)
     end = (rows - 1, cols - 1)
 
-    return BFS(start, end, fallenBytes)
+    return str(BFS(start, end, fallenBytes))
 
 
 def part_b(data):

@@ -1,4 +1,4 @@
-# Advent of Code - Total Stars: 63
+# Advent of Code - Total Stars: 65
 
 <details>
 <summary> 2015 - Total Stars: 12</summary>
@@ -32,7 +32,7 @@
 </details>
 
 <details>
-<summary> 2024 - Total Stars: 36</summary>
+<summary> 2024 - Total Stars: 38</summary>
 
 | Day | Part A Stars | Part A Runtime | Part B Stars | Part B Runtime |
 |-----|--------------|----------------|--------------|----------------|
@@ -47,7 +47,7 @@
 | [9](https://adventofcode.com/2024/day/9) | ⭐ | 165.52 ms | ⭐ | 2.68 s |
 | [10](https://adventofcode.com/2024/day/10) | ⭐ | 18.83 ms | ⭐ | 11.76 ms |
 | [11](https://adventofcode.com/2024/day/11) | ⭐ | 13.32 ms | ⭐ | 340.11 ms |
-| [12](https://adventofcode.com/2024/day/12) |  | N/A |  | N/A |
+| [12](https://adventofcode.com/2024/day/12) | ⭐ | 310.08 ms | ⭐ | 231.29 ms |
 | [13](https://adventofcode.com/2024/day/13) | ⭐ | 2.70 ms | ⭐ | 1.57 ms |
 | [14](https://adventofcode.com/2024/day/14) | ⭐ | 3.34 ms | ⭐ | 3.30 s |
 | [15](https://adventofcode.com/2024/day/15) | ⭐ | 14.39 ms | ⭐ | 2.32 s |

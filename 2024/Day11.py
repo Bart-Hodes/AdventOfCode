@@ -1,19 +1,16 @@
-from aocd import data
+from functools import cache
 from aocd.models import Puzzle
 
 
-def calcAmountOfStones(stones, count, cache):
+@cache
+def calcAmountOfStones(stone, count):
     if count == 0:
-        return len(stones)
+        return 1
+
     result = 0
-    for stone in stones:
-        if (stone, count) in cache:
-            result += cache[(stone, count)]
-        else:
-            new_stones = TransformStones(stone)
-            answer = calcAmountOfStones(new_stones, count - 1, cache)
-            cache[(stone, count)] = answer
-            result += answer
+    for new_stone in TransformStones(stone):
+        result += calcAmountOfStones(new_stone, count - 1)
+
     return result
 
 
@@ -31,33 +28,16 @@ def TransformStones(stone):
 
 
 def part_a(data):
-    data = data.split(" ")
-    data = [int(x) for x in data]
-
-    return calcAmountOfStones(data, 25, {})
+    data = [int(x) for x in data.split(" ")]
+    return str(sum(calcAmountOfStones(stone, 25) for stone in data))
 
 
 def part_b(data):
-    data = data.split(" ")
-    data = [int(x) for x in data]
+    data = [int(x) for x in data.split(" ")]
+    return str(sum(calcAmountOfStones(stone, 75) for stone in data))
 
-    return calcAmountOfStones(data, 75, {})
-
-
-import time
 
 if __name__ == "__main__":
     puzzle = Puzzle(2024, 11)
-    # for example in puzzle.examples:
-    #     if example.answer_a:
-    #         if int(example.answer_a) != part_a(example.input_data):
-    #             print("Example part A failed!")
-    #             print(f"Expected: {example.answer_a}")
-    #             print(f"Got: {part_a(example.input_data)}")
-    # if example.answer_b:
-    #     if int(example.answer_b) != part_b(example.input_data):
-    #         print("Example part B failed!")
-    #         print(f"Expected: {example.answer_b}")
-    #         print(f"Got: {part_b(example.input_data)}")
-    puzzle.answer_a = part_a(data)
-    puzzle.answer_b = part_b(data)
+    puzzle.answer_a = part_a(puzzle.input_data)
+    puzzle.answer_b = part_b(puzzle.input_data)

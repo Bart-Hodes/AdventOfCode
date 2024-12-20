@@ -45,7 +45,7 @@ def part_a(data):
         if composable(desiredPattern, tuple(availiblePatterns)):
             numPossiblePatterns += 1
 
-    return str(numPossiblePatterns)
+    return numPossiblePatterns
 
 
 def part_b(data):
@@ -60,7 +60,7 @@ def part_b(data):
             desiredPattern, tuple(availiblePatterns)
         )
 
-    return str(numPossiblePatterns)
+    return numPossiblePatterns
 
 
 if __name__ == "__main__":

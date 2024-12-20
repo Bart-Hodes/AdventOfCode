@@ -30,11 +30,11 @@ def run_solution(year, day, part, puzzle):
         result = getattr(solution_module, f"part_{part}")(puzzle.input_data)
         if part == "a":
             assert (
-                result == puzzle.answer_a
+                str(result) == puzzle.answer_a
             ), f"Expected: {puzzle.answer_a}, got: {result}"
         else:
             assert (
-                result == puzzle.answer_b
+                str(result) == puzzle.answer_b
             ), f"Expected: {puzzle.answer_b}, got: {result}"
         runtime = time.time() - start_time
         return runtime

@@ -1,4 +1,3 @@
-from aocd import data
 from aocd.models import Puzzle
 
 
@@ -124,5 +123,5 @@ if __name__ == "__main__":
     #         print(example)
     #         print(f"Expected: {example.answer_b}")
     #         print(f"Got: {part_b(example.input_data)}")
-    puzzle.answer_a = part_a(data)
-    puzzle.answer_b = part_b(data)
+    puzzle.answer_a = part_a(puzzle.input_data)
+    puzzle.answer_b = part_b(puzzle.input_data)

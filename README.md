@@ -1,16 +1,17 @@
-# Advent of Code - Total Stars: 67
+# Advent of Code - Total Stars: 69
 
 <details>
 <summary> 2015 - Total Stars: 12</summary>
 
 | Day | Part A Stars | Part A Runtime | Part B Stars | Part B Runtime |
 |-----|--------------|----------------|--------------|----------------|
-| [1](https://adventofcode.com/2015/day/1) | ⭐ | 1.81 ms | ⭐ | 300.65 µs |
-| [2](https://adventofcode.com/2015/day/2) | ⭐ | 2.05 ms | ⭐ | 1.08 ms |
-| [3](https://adventofcode.com/2015/day/3) | ⭐ | 4.17 ms | ⭐ | 4.14 ms |
-| [4](https://adventofcode.com/2015/day/4) | ⭐ | 382.18 ms | ⭐ | 9.80 s |
-| [5](https://adventofcode.com/2015/day/5) | ⭐ | 2.88 ms | ⭐ | 2.47 ms |
-| [6](https://adventofcode.com/2015/day/6) | ⭐ | 1.55 s | ⭐ | 2.86 s |
+| [1](https://adventofcode.com/2015/day/1) | ⭐ | 4.72 ms | ⭐ | 708.34 µs |
+| [2](https://adventofcode.com/2015/day/2) | ⭐ | 4.09 ms | ⭐ | 4.59 ms |
+| [3](https://adventofcode.com/2015/day/3) | ⭐ | 7.23 ms | ⭐ | 7.78 ms |
+| [4](https://adventofcode.com/2015/day/4) | ⭐ | 366.85 ms | ⭐ | 9.74 s |
+| [5](https://adventofcode.com/2015/day/5) | ⭐ | 3.81 ms | ⭐ | 2.86 ms |
+| [6](https://adventofcode.com/2015/day/6) | ⭐ | 1.69 s | ⭐ | 4.06 s |
+| [7](https://adventofcode.com/2015/day/7) |  | N/A |  | N/A |
 
 </details>
 
@@ -19,20 +20,21 @@
 
 | Day | Part A Stars | Part A Runtime | Part B Stars | Part B Runtime |
 |-----|--------------|----------------|--------------|----------------|
-| [1](https://adventofcode.com/2023/day/1) | ⭐ | 3.02 ms | ⭐ | 15.33 ms |
-| [2](https://adventofcode.com/2023/day/2) | ⭐ | 2.61 ms | ⭐ | 2.84 ms |
-| [3](https://adventofcode.com/2023/day/3) | ⭐ | 5.96 ms | ⭐ | 8.94 ms |
-| [4](https://adventofcode.com/2023/day/4) | ⭐ | 3.11 ms | ⭐ | 3.59 ms |
+| [1](https://adventofcode.com/2023/day/1) | ⭐ | 6.89 ms | ⭐ | 27.50 ms |
+| [2](https://adventofcode.com/2023/day/2) | ⭐ | 6.83 ms | ⭐ | 6.99 ms |
+| [3](https://adventofcode.com/2023/day/3) | ⭐ | 9.49 ms | ⭐ | 5.27 ms |
+| [4](https://adventofcode.com/2023/day/4) | ⭐ | 5.54 ms | ⭐ | 4.08 ms |
 | [5](https://adventofcode.com/2023/day/5) | ⭐ | 3.88 ms |  | N/A |
 | [6](https://adventofcode.com/2023/day/6) | ⭐ | 1.51 ms | ⭐ | 488.52 µs |
 | [7](https://adventofcode.com/2023/day/7) | ⭐ | 7.79 ms |  | N/A |
+| [8](https://adventofcode.com/2023/day/8) |  | N/A |  | N/A |
 | [24](https://adventofcode.com/2023/day/24) | ⭐ | 294.44 ms | ⭐ | 1.26 ms |
 | [25](https://adventofcode.com/2023/day/25) | ⭐ | 24.05 s |  | N/A |
 
 </details>
 
 <details>
-<summary> 2024 - Total Stars: 40</summary>
+<summary> 2024 - Total Stars: 42</summary>
 
 | Day | Part A Stars | Part A Runtime | Part B Stars | Part B Runtime |
 |-----|--------------|----------------|--------------|----------------|
@@ -56,6 +58,7 @@
 | [18](https://adventofcode.com/2024/day/18) | ⭐ | 10.52 ms | ⭐ | 2.34 s |
 | [19](https://adventofcode.com/2024/day/19) | ⭐ | 208.86 ms | ⭐ | 783.26 ms |
 | [20](https://adventofcode.com/2024/day/20) | ⭐ | 12.53 s | ⭐ | 13.28 s |
+| [21](https://adventofcode.com/2024/day/21) | ⭐ | 4.56 ms | ⭐ | 9.27 ms |
 
 </details>
 

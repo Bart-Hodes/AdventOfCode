@@ -43,7 +43,7 @@
 | [3](https://adventofcode.com/2024/day/3) | ⭐ | 3.81 ms | ⭐ | 1.97 ms |
 | [4](https://adventofcode.com/2024/day/4) | ⭐ | 24.49 ms | ⭐ | 11.63 ms |
 | [5](https://adventofcode.com/2024/day/5) | ⭐ | 29.86 ms | ⭐ | 85.14 ms |
-| [6](https://adventofcode.com/2024/day/6) | ⭐ | 88.19 ms | ⭐ | 304.87 s |
+| [6](https://adventofcode.com/2024/day/6) | ⭐ | 88.18 ms | ⭐ | 605.14 ms |
 | [7](https://adventofcode.com/2024/day/7) | ⭐ | 12.26 s | ⭐ | 34.60 s |
 | [8](https://adventofcode.com/2024/day/8) | ⭐ | 2.82 ms | ⭐ | 2.11 ms |
 | [9](https://adventofcode.com/2024/day/9) | ⭐ | 153.96 ms | ⭐ | 2.60 s |

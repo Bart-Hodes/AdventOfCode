@@ -14,7 +14,6 @@ def part_a(data):
             for i, char in enumerate(line):
                 if char == "#":
                     columns[i] += 1
-        print(schematic[0][0])
         if schematic[0][0] == "#":
             locks.append(columns)
         else:
@@ -28,6 +27,10 @@ def part_a(data):
             if max(temp) <= 5:
                 count += 1
     return count
+
+
+def part_b(data):
+    return ""
 
 
 if __name__ == "__main__":

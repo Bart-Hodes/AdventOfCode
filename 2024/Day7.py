@@ -5,6 +5,32 @@ import itertools
 operators = ["*", "+", "||"]
 
 
+def PlaceOperator(values, result, concat=False):
+    *values, last = values
+
+    if result < 0:
+        return False
+
+    if not values:
+        return last == result
+
+    quotient, remainder = divmod(result, last)
+
+    if remainder == 0 and PlaceOperator(values, quotient, concat):
+        return True
+
+    prefix = str(result)[: -len(str(last))]
+    if (
+        concat
+        and str(result).endswith(str(last))
+        and prefix != ""
+        and PlaceOperator(values, int(prefix), concat)
+    ):
+        return True
+
+    return PlaceOperator(values, result - last, concat)
+
+
 def part_a(data):
     lines = data.split("\n")
 
@@ -12,17 +38,11 @@ def part_a(data):
     for line in lines:
         contents = line.split(":")
         result = contents[0]
-        values = contents[1].split(" ")[1:]
+        values = contents[1].strip().split(" ")
+        values = [int(x) for x in values]
 
-        permutations = list(itertools.product([0, 1], repeat=len(values) - 1))
-        for perm in permutations:
-            product = values[0]
-            for idx in range(len(perm)):
-                product = eval(f"{product} {operators[perm[idx]]} {values[idx+1]}")
-
-            if int(product) == int(result):
-                count += int(result)
-                break
+        if PlaceOperator(values, int(result)):
+            count += int(result)
 
     return count
 
@@ -34,23 +54,11 @@ def part_b(data):
     for line in lines:
         contents = line.split(":")
         result = contents[0]
-        values = contents[1].split(" ")[1:]
+        values = contents[1].strip().split(" ")
+        values = [int(x) for x in values]
 
-        permutations = list(itertools.product([0, 1, 2], repeat=len(values) - 1))
-        for perm in permutations:
-            workingSet = values.copy()
-            product = workingSet[0]
-            for idx in range(len(perm)):
-                if perm[idx] == 0:
-                    product = int(product) * int(workingSet[idx + 1])
-                elif perm[idx] == 1:
-                    product = int(product) + int(workingSet[idx + 1])
-                elif perm[idx] == 2:
-                    product = str(product) + workingSet[idx + 1]
-
-            if int(product) == int(result):
-                count += int(result)
-                break
+        if PlaceOperator(values, int(result), concat=True):
+            count += int(result)
 
     return count
 
